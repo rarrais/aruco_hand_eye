@@ -1,4 +1,6 @@
 <launch>
+  <!-- ORIGINAL LAUNCH FILE (with some changes), FOR REFERENCE --> 
+
   <!-- Set the eye mode (see README for more info) -->
   <arg name="camera_parent_frame" default="/ee_link"/>
   <arg name="marker_parent_frame" default="/world"/>
