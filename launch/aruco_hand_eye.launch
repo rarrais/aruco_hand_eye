@@ -1,19 +1,21 @@
 <launch>
   <!-- Set the eye mode (see README for more info) -->
-  <arg name="camera_parent_frame"/>
-  <arg name="marker_parent_frame"/>
+  <arg name="camera_parent_frame" default="/ee_link"/>
+  <arg name="marker_parent_frame" default="/world"/>
 
   <!-- The ARUCO marker properties -->
   <arg name="markerid"              default="582"/>
-  <arg name="markersize"            default="0.141"/>    <!-- in m -->
+  <arg name="markersize"            default="0.144"/>    <!-- in m -->
   <arg name="sample_rate"           default="2"/>
 
   <!-- The camera topics and frame to use for calibration -->
-  <arg name="camera" doc="camera namespace"/>
-  <arg name="image"                 default="$(arg camera)/image_rect_color"/>
-  <arg name="camera_info"           default="$(arg camera)/camera_info"/>
-  <arg name="camera_frame"          default="$(arg camera)_optical_frame"/>
-  <arg name="marker_frame"          default="/hand_eye/$(arg camera)/aruco_marker_frame"/>
+  <arg name="camera"/>
+  <!-- <arg name="camera" default="camera"/> -->
+
+  <arg name="image"                 default="camera/rgb/image_rect_color"/>
+  <arg name="camera_info"           default="camera/rgb/camera_info"/>
+  <arg name="camera_frame"          default="camera_link"/>
+  <arg name="marker_frame"          default="aruco_marker_frame"/>
 
   <!-- leave empty and the pose will be published wrt param parent_name -->
   <arg name="reference_frame"       default="$(arg camera_frame)"/>
@@ -31,8 +33,8 @@
 
   <!-- Transform from the camera base link to the optical link (only necessary
        if you want aruco_hand_eye to compute the transform for you) -->
-  <arg name="xyz_optical_base" default="[0.0, 0.0, 0.0]"/>
-  <arg name="rpy_optical_base" default="[0.0, 0.0, 0.0]"/>
+  <arg name="xyz_optical_base" default="[0.000, 0.022, 0.000]"/>
+  <arg name="rpy_optical_base" default="[-1.571, -0.000, -1.571]"/>
 
   <group ns="$(arg camera)">
 
