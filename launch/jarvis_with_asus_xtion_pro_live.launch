@@ -14,7 +14,7 @@
       <param name="marker_id"          value="582"/>
 
       <!-- RGB Optical Frame -->
-      <param name="reference_frame"    value="/camera_rgb_optical_frame"/>
+      <param name="reference_frame"    value="/camera_link"/>
       
       <!-- RGB Optical Frame (same as reference_frame) -->
       <param name="camera_frame"       value="/camera_rgb_optical_frame"/>
@@ -48,8 +48,8 @@
 
       <!-- To retrive this values, perform a tf_echo from camera_link (i.e., the reference frame that is going to be attached to ee_link) to /camera_rgb_optical_frame -->
       <!-- rosrun tf tf_echo camera_link camera_rgb_optical_frame -->
-      <rosparam param="xyz_optical_base" subst_value="true">[0.000, -0.045, 0.000]</rosparam>
-      <rosparam param="rpy_optical_base" subst_value="true">[-1.571, -0.000, -1.571]</rosparam>
+      <rosparam param="xyz_optical_base" subst_value="true">[0.000, 0.000, 0.000]</rosparam>
+      <rosparam param="rpy_optical_base" subst_value="true">[0.000, 0.000, 0.000]</rosparam>
 
     </node>
 
