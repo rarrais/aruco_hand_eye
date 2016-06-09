@@ -44,7 +44,7 @@
 
       <param name="publish_tf" value="true"/>
       <param name="tf_suffix" value=""/>
-      <param name="interactive" value="true"/>
+      <param name="interactive" value="false"/>
 
       <!-- To retrive this values, perform a tf_echo from camera_link (i.e., the reference frame that is going to be attached to ee_link) to /camera_rgb_optical_frame -->
       <!-- rosrun tf tf_echo camera_link camera_rgb_optical_frame -->
