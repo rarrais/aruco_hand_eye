@@ -1,0 +1,56 @@
+<launch>
+
+    <!-- TRACK THE ARUCO TARGET IN A GIVEN CAMERA -->
+    <node name="aruco_tracker" pkg="aruco_ros" type="single">
+
+      <!-- Information about the RGB Camera -->
+      <remap from="/camera_info" to="camera/rgb/camera_info" /> 
+
+      <!-- RGB Rectified Image topic  -->
+      <remap from="/image" to="camera/rgb/image_rect_color" />
+
+      <param name="image_is_rectified" value="True"/>
+      <param name="marker_size"        value="0.144"/> <!-- in m --> 
+      <param name="marker_id"          value="582"/>
+
+      <!-- RGB Optical Frame -->
+      <param name="reference_frame"    value="/camera_link"/>
+      
+      <!-- RGB Optical Frame (same as reference_frame) -->
+      <param name="camera_frame"       value="/camera_rgb_optical_frame"/>
+     
+      <!-- Aruco Marker Reference Frame (position of the aruco marker in space) -->
+      <param name="marker_frame"       value="aruco_marker_frame" />
+
+    </node>
+
+
+    <!-- RUN THE VISP SOLVER TO DETERMINE THE EXTRINSIC PARAMETERS -->
+    <node name="hand_eye_solver" pkg="visp_hand2eye_calibration" type="visp_hand2eye_calibration_calibrator">
+      <remap from="/compute_effector_camera_quick" to="compute_effector_camera_quick"/>
+    </node>
+
+
+    <!-- CONNECT THE ARUCO TRACKER TO THE SOLVER -->
+    <node name="hand_eye_connector" launch-prefix="" pkg="aruco_hand_eye" type="calibrate.py" output="screen">
+
+      <param name="sample_rate" value="2"/>
+
+      <!-- Reference Frame where the Camara is attached on the robot -->
+      <param name="camera_parent_frame" value="/base_laser_navigation_link"/>
+
+      <!-- Reference Frame to where the Aruco Marker is going to be located (usually the base of the robot) -->
+      <param name="marker_parent_frame" value="/map"/>
+
+      <param name="publish_tf" value="true"/>
+      <param name="tf_suffix" value=""/>
+      <param name="interactive" value="false"/>
+
+      <!-- To retrive this values, perform a tf_echo from camera_link (i.e., the reference frame that is going to be attached to ee_link) to /camera_rgb_optical_frame -->
+      <!-- rosrun tf tf_echo camera_link camera_rgb_optical_frame -->
+      <rosparam param="xyz_optical_base" subst_value="true">[0.000, 0.000, 0.000]</rosparam>
+      <rosparam param="rpy_optical_base" subst_value="true">[0.000, 0.000, 0.000]</rosparam>
+
+    </node>
+
+</launch>
