@@ -10,7 +10,7 @@
       <remap from="/image" to="camera/rgb/image_rect_color" />
 
       <param name="image_is_rectified" value="True"/>
-      <param name="marker_size"        value="0.168"/> <!-- in m --> 
+      <param name="marker_size"        value="0.155"/> <!-- in m --> 
       <param name="marker_id"          value="582"/>
 
       <!-- RGB Optical Frame -->
@@ -37,7 +37,7 @@
       <param name="sample_rate" value="2"/>
 
       <!-- Reference Frame where the Camara is attached on the robot -->
-      <param name="camera_parent_frame" value="/ee_link"/>
+      <param name="camera_parent_frame" value="/upper_arm_link"/>
 
       <!-- Reference Frame to where the Aruco Marker is going to be located (usually the base of the robot) -->
       <param name="marker_parent_frame" value="/base_link"/>
